@@ -1,7 +1,7 @@
 import React from "react";
 
 const Footer = () => {
-  // this part show after the login
+  // this part  don't show into login
   return (
     <div className="bg-black">
       <p className="text-white text-center p-5">
