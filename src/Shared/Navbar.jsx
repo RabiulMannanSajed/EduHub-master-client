@@ -1,3 +1,4 @@
+import { Link, NavLink } from "react-router-dom";
 import Eduhub from "../assets/images/image.png";
 const Navbar = () => {
   return (
@@ -62,7 +63,9 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn btn-info text-xl">Login</a>
+          <NavLink to="/login">
+            <a className="btn btn-info text-xl">Login</a>
+          </NavLink>
         </div>
       </div>
     </div>

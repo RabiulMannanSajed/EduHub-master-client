@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => {
   // this part  don't show into login
   return (
