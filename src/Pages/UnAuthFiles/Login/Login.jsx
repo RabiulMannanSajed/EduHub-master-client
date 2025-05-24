@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 
@@ -9,8 +10,27 @@ const Login = () => {
     formState: { error },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("this is register ");
+  const onSubmit = async (data) => {
+    const userData = {
+      email: data.email,
+      password: data.password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/auth/login",
+        data
+      );
+      if (response.ok) {
+        alert("Registration successful!");
+        reset(); // Clear form
+      } else {
+        alert(`Registration failed: ${response.message}`);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong while submitting the form.");
+    }
   };
 
   return (
@@ -18,7 +38,7 @@ const Login = () => {
       <div className="flex-1">
         <h1 className="textColor mb-[10%] ">UiU CLS</h1>
         <p className="textColor ml-[65%]">
-          <u>Sign Up</u>
+          <u>Login</u>
         </p>
         <p>Create Your Account To Explore The Wisdom</p>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -64,10 +84,10 @@ const Login = () => {
         </form>
 
         <p>
-          Already have an account{" "}
+          Create an account{" "}
           <NavLink to="/register" className={"text-blue-500"}>
             {" "}
-            Login
+            Register
           </NavLink>{" "}
         </p>
       </div>

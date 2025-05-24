@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 
 const Register = () => {
   const {
@@ -7,10 +8,41 @@ const Register = () => {
     reset,
     formState: { error },
   } = useForm();
-  // this is the  the part of the
 
-  const onSubmit = (data) => {
-    console.log("this is register ");
+  const onSubmit = async (data) => {
+    const UserData = {
+      password: data.password,
+      blood: data.blood,
+      email: data.email,
+      departmentName: data.departmentName,
+      role: data.role,
+      varsityName: data.varsityName,
+      name: data.name,
+    };
+    console.log(UserData);
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/users/create-user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const result = await response.json();
+      if (response.ok) {
+        alert("Registration successful!");
+        reset(); // Clear form
+      } else {
+        alert(`Registration failed: ${result.message}`);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong while submitting the form.");
+    }
   };
 
   return (
@@ -24,13 +56,13 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* First Name */}
           <div className="mt-[5%] divOfSignUp">
-            <label>First Name </label>
+            <label>Name </label>
             <br />
             <input
               type="text"
-              {...register("firstName")}
+              {...register("name")}
               required={true}
-              name="firstName"
+              name="name"
               placeholder="Enter Your First Name "
               className="input-bgRemove"
             />
@@ -40,11 +72,11 @@ const Register = () => {
           <div className="mt-[5%] divOfSignUp">
             <label>Email</label>
             <br />
+
             <input
               {...register("email", {
                 required: true,
                 pattern: {
-                  // value: /\S+@bscse\.uiu\.ac\.bd$/,
                   message: "Entered value does not match email format",
                 },
               })}
@@ -74,8 +106,8 @@ const Register = () => {
             <br />
             <input
               type="text"
-              {...register("universityName")}
-              name="universityName"
+              {...register("varsityName")}
+              name="varsityName"
               placeholder="Enter Your University Name"
               className="input-bgRemove"
             />
@@ -86,8 +118,8 @@ const Register = () => {
             <label>Department Name</label>
             <br />
             <select
-              {...register("subject", { required: true })}
-              name="subject"
+              {...register("departmentName", { required: true })}
+              name="departmentName"
               className="input-bgRemove"
               defaultValue="CSE"
             >
@@ -155,7 +187,14 @@ const Register = () => {
           <div className="form-control mt-6 mb-9 w-[80%]">
             <input className="signUpBtn" type="submit" value="Create Account" />
           </div>
-        </form>
+        </form>{" "}
+        <p>
+          Already have an account{" "}
+          <NavLink to="/login" className={"text-blue-500"}>
+            {" "}
+            Login
+          </NavLink>{" "}
+        </p>
       </div>
 
       <div className="flex-1">

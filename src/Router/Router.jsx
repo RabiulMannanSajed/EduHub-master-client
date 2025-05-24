@@ -3,11 +3,13 @@ import Main from "../Layout/Main";
 import Home from "../Pages/UnAuthFiles/Home/Home";
 import Register from "../Pages/UnAuthFiles/Register/Register";
 import Login from "../Pages/UnAuthFiles/Login/Login";
+import Payment from "../Pages/AuthFile/Payment/Payment";
+import Profile from "../Pages/AuthFile/Profile/Profile";
 
 export const route = createBrowserRouter([
   {
     path: "/",
-    element: <Main></Main>,
+    element: <Main />,
     children: [
       {
         path: "/",
@@ -20,6 +22,14 @@ export const route = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
