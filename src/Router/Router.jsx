@@ -5,6 +5,8 @@ import Register from "../Pages/UnAuthFiles/Register/Register";
 import Login from "../Pages/UnAuthFiles/Login/Login";
 import Payment from "../Pages/AuthFile/Payment/Payment";
 import Profile from "../Pages/AuthFile/Profile/Profile";
+import BloodCamp from "../Pages/AuthFile/BloodCamp/BloodCamp";
+import ProfileOfHelper from "../Pages/AuthFile/ProfileOfHelper/ProfileOfHelper";
 
 export const route = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ export const route = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/bloodCamp",
+        element: <BloodCamp />,
+      },
+      {
+        path: "/blood-donor/:id",
+        element: <ProfileOfHelper />,
       },
     ],
   },

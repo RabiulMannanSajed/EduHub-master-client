@@ -12,7 +12,6 @@ const Main = () => {
   return (
     <div>
       {showNavbar || <AuthNavbar />}
-      {/*<Navbar /> */}
       {showNavbar && <Navbar />}
       <Outlet />
       <Footer />
