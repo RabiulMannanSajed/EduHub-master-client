@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const AuthNavbar = () => {
   return (
@@ -27,7 +28,7 @@ const AuthNavbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           ></ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">EduHub</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -62,10 +63,7 @@ const AuthNavbar = () => {
               <summary>MARKETPLACE</summary>
               <ul className="p-2">
                 <li>
-                  <a>Buy</a>
-                </li>
-                <li>
-                  <a>Sell</a>
+                  <NavLink to="/booksBuySell">Books</NavLink>
                 </li>
                 <li>
                   <a>Item</a>
@@ -86,10 +84,13 @@ const AuthNavbar = () => {
               </ul>
             </details>
           </li>
+          <li>
+            <NavLink to="/bloodCamp">Blood Camp</NavLink>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <a className="btn">LogOut</a>
       </div>
     </div>
   );
