@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+
 const BooksBuyAndSell = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -11,11 +14,60 @@ const BooksBuyAndSell = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // You can handle the file (data.image[0]) and other info here.
-    setIsModalOpen(false);
-    reset();
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+
+    try {
+      // 1. Upload image to imgbb
+      const imgRes = await fetch(img_hosting_url, {
+        method: "POST",
+        body: formData,
+      });
+
+      const imgData = await imgRes.json();
+      const imageURL = imgData.success ? imgData.data.display_url : null;
+
+      if (!imageURL) {
+        alert("Image upload failed");
+        return;
+      }
+
+      const sellData = {
+        title: data.title,
+        authorOrBrand: data.author,
+        price: data.price,
+        condition: data.condition,
+        item: data.itemType,
+        imageURL: imageURL,
+      };
+
+      const res = await fetch(
+        "http://localhost:5000/api/v1/sell/create-sell-post",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sellData),
+        }
+      );
+
+      const resData = await res.json();
+
+      if (res.ok) {
+        alert("Sell post uploaded successfully!");
+        setIsModalOpen(false);
+        reset();
+      } else {
+        alert("Failed to post: " + resData.message || "Unknown error");
+      }
+    } catch (err) {
+      console.error("Upload error:", err);
+      alert("Something went wrong. Check console.");
+    }
   };
 
   return (
@@ -27,6 +79,7 @@ const BooksBuyAndSell = () => {
         >
           <p className="text-center pl-5 pr-5 pt-2 pb-2 font-bold">Sell Post</p>
         </div>
+
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
             <div className="bg-white rounded-lg p-6 w-[90%] max-w-md relative">
@@ -77,6 +130,7 @@ const BooksBuyAndSell = () => {
                   <option value="Like New">Like New</option>
                   <option value="Used">Used</option>
                 </select>
+
                 {errors.condition && (
                   <p className="text-red-500 text-sm">Condition is required</p>
                 )}
@@ -129,12 +183,7 @@ const BooksBuyAndSell = () => {
             </div>
           </div>
         )}
-        <div>
-          <p>here all books</p>
-        </div>
       </div>
-
-      {/* Modal */}
     </div>
   );
 };
