@@ -10,6 +10,7 @@ import ProfileOfHelper from "../Pages/AuthFile/ProfileOfHelper/ProfileOfHelper";
 import BooksBuyAndSell from "../Pages/AuthFile/BooksBuyAndSell/BooksBuyAndSell";
 import BookBuy from "../Pages/AuthFile/BuyBookAndItems/BookBuy/BookBuy";
 import ItemBuy from "../Pages/AuthFile/BuyBookAndItems/ItemBuy/ItemBuy";
+import AuthHome from "../Pages/AuthFile/AuthHome/AuthHome/AuthHome";
 
 export const route = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const route = createBrowserRouter([
       {
         path: "/blood-donor/:id",
         element: <ProfileOfHelper />,
+      },
+      {
+        path: "/authHome",
+        element: <AuthHome />,
       },
     ],
   },

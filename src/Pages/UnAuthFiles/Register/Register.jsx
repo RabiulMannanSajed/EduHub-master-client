@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -34,6 +36,7 @@ const Register = () => {
 
       const result = await response.json();
       if (response.ok) {
+        navigate("/authHome");
         alert("Registration successful!");
         reset(); // Clear form
       } else {
@@ -82,7 +85,7 @@ const Register = () => {
               })}
               name="email"
               placeholder="email"
-              className="input-bgRemove"
+              className="input-bgRemove w-full"
               type="email"
             />
           </div>
@@ -96,7 +99,7 @@ const Register = () => {
               {...register("photo")}
               name="photo"
               placeholder="Enter Your Photo URL"
-              className="input-bgRemove"
+              className="input-bgRemove w-full"
             />
           </div>
 
@@ -109,7 +112,7 @@ const Register = () => {
               {...register("varsityName")}
               name="varsityName"
               placeholder="Enter Your University Name"
-              className="input-bgRemove"
+              className="input-bgRemove w-full"
             />
           </div>
 
@@ -120,7 +123,7 @@ const Register = () => {
             <select
               {...register("departmentName", { required: true })}
               name="departmentName"
-              className="input-bgRemove"
+              className="input-bgRemove w-full"
               defaultValue="CSE"
             >
               <option value="CSE">CSE</option>
@@ -138,7 +141,7 @@ const Register = () => {
             <select
               {...register("role")}
               name="role"
-              className="input-bgRemove"
+              className="input-bgRemove w-full"
               defaultValue="student"
             >
               <option value="student">Student</option>
@@ -154,7 +157,7 @@ const Register = () => {
             <select
               {...register("blood")}
               name="blood"
-              className="input-bgRemove"
+              className="input-bgRemove w-full"
             >
               <option value="">Select Blood Group</option>
               <option value="A+">A+</option>
@@ -179,7 +182,7 @@ const Register = () => {
               })}
               name="password"
               placeholder="Enter Your password"
-              className="input-bgRemove"
+              className="input-bgRemove w-full"
             />
           </div>
 
