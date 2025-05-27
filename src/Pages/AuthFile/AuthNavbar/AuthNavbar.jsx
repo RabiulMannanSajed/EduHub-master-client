@@ -66,7 +66,7 @@ const AuthNavbar = () => {
                   <NavLink to="/booksBuySell">Books</NavLink>
                 </li>
                 <li>
-                  <a>Item</a>
+                  <NavLink to="/itemBuySell">Items</NavLink>
                 </li>
               </ul>
             </details>

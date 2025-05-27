@@ -25,7 +25,7 @@ const BookBuy = () => {
             <p className="text-gray-600 mb-1">Author: {book.authorOrBrand}</p>
             <p className="text-gray-600 mb-1">Condition: {book.condition}</p>
             <p className="text-lg font-bold mb-3">Price: ${book.price}</p>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+            <button className="bg-[#f08e40] text-white px-4 py-2 rounded-lg hover:bg-[#f18e21] transition">
               Buy This Book
             </button>
           </div>
