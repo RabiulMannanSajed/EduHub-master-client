@@ -72,7 +72,7 @@ const BooksBuyAndSell = () => {
 
   return (
     <div>
-      <div className="w-[80%] mx-auto">
+      <div>
         <div
           className="bg-amber-500 w-[130px] m-5 rounded-md cursor-pointer"
           onClick={() => setIsModalOpen(true)}

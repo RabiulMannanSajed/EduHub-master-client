@@ -8,6 +8,7 @@ import Profile from "../Pages/AuthFile/Profile/Profile";
 import BloodCamp from "../Pages/AuthFile/BloodCamp/BloodCamp";
 import ProfileOfHelper from "../Pages/AuthFile/ProfileOfHelper/ProfileOfHelper";
 import BooksBuyAndSell from "../Pages/AuthFile/BooksBuyAndSell/BooksBuyAndSell";
+import BookBuy from "../Pages/AuthFile/BuyBookAndItems/BookBuy/BookBuy";
 
 export const route = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ export const route = createBrowserRouter([
       },
       {
         path: "/booksBuySell",
-        element: <BooksBuyAndSell />,
+        element: <BookBuy />,
       },
       {
         path: "/blood-donor/:id",
