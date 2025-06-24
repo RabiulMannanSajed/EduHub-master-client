@@ -3,7 +3,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import axios from "axios";
 import { useUser } from "../../CustomProvider/userContext";
 import useBloodDonors from "../../../../hooks/useBloodDonners";
-
+const img_hosting_token = "33706d1cbb5d148ebd01d844598979ba";
 // Assuming these custom hooks return user info and blood donor list
 
 const ProfileSetting = () => {
@@ -57,16 +57,38 @@ const ProfileSetting = () => {
     }
   }, [currentUser, reset]);
 
-  const onSubmit = async (data) => {
-    try {
-      if (!currentUser?._id) {
-        console.error("User ID not found");
-        return;
-      }
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
+  
+  const onSubmit = async (data) => {
+    let profileImageUrl = currentUser?.photoUrl || "";
+
+    // Upload image if selected
+    if (data.photo?.[0]) {
+      const formData = new FormData();
+      formData.append("image", data.photo[0]);
+
+      const imgRes = await fetch(img_hosting_url, {
+        method: "POST",
+        body: formData,
+      });
+
+      const imgData = await imgRes.json();
+      if (imgData.success) {
+        profileImageUrl = imgData.data.display_url;
+      }
+    }
+
+    // Build update payload
+    const updatedData = {
+      ...data,
+      photoUrl: profileImageUrl,
+    };
+
+    try {
       const response = await axios.patch(
         `http://localhost:5000/api/v1/users/${currentUser?._id}`,
-        data
+        updatedData
       );
 
       if (response?.data?.success) {
@@ -81,27 +103,50 @@ const ProfileSetting = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <label>University Name</label>
-        <input {...register("varsityName")} className="input" />
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4 w-[80%] mx-auto h-screen justify-center items-center"
+    >
+      <p className="text-2xl font-semibold text-center mb-10 mt-7">
+        Update Profile{" "}
+      </p>
+      <div className="flex justify-between">
+        <div className="flex-1">
+          <label className="mb-5 mt-5">University Name</label>
+          <br />
+          <input {...register("varsityName")} className="input" />
+        </div>
+
+        <div className="flex-1">
+          <label className="mb-5 mt-5">Department Name</label>
+          <br />
+          <input {...register("departmentName")} className="input" />
+        </div>
       </div>
 
-      <div>
-        <label>Department Name</label>
-        <input {...register("departmentName")} className="input" />
-      </div>
+      <div className="flex justify-between">
+        <div className="flex-1">
+          <label>Phone</label>
+          <br />
+          <input {...register("Phone")} className="input" />
+        </div>
 
-      <div>
-        <label>Phone</label>
-        <input {...register("Phone")} className="input" />
+        <div className="flex-1">
+          <label>Address</label>
+          <br />
+          <input {...register("Address")} className="input" />
+        </div>
       </div>
-
       <div>
-        <label>Address</label>
-        <input {...register("Address")} className="input" />
+        <label>Profile Photo</label>
+        <br />
+        <input
+          type="file"
+          {...register("photo")}
+          accept="image/*"
+          className="input"
+        />
       </div>
-
       <div>
         <label>Skills</label>
         {fields.map((field, index) => (
@@ -116,17 +161,25 @@ const ProfileSetting = () => {
               placeholder="Skill Label"
               className="input"
             />
-            <button type="button" onClick={() => remove(index)}>
+            <button
+              className="bg-red-500 pt-2 pb-2 pl-3 pr-3 rounded font-bold"
+              type="button"
+              onClick={() => remove(index)}
+            >
               Remove
             </button>
           </div>
         ))}
-        <button type="button" onClick={() => append({ name: "", label: "" })}>
+        <button
+          type="button"
+          className="bg-blue-500 pt-2 pb-2 pl-3 pr-3 rounded font-bold"
+          onClick={() => append({ name: "", label: "" })}
+        >
           Add Skill
         </button>
       </div>
 
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn bg-green-500 font-bold">
         Update Info
       </button>
     </form>

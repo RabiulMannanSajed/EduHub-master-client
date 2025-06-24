@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useUser } from "../CustomProvider/userContext";
+import useBloodDonors from "../../../hooks/useBloodDonners";
 
 const AuthNavbar = () => {
+  const { userEmail } = useUser();
+  const [users] = useBloodDonors(); // get the data array from the object
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    console.log("userEmail:", userEmail);
+    console.log("users:", users?.data);
+
+    if (userEmail && users?.data?.length > 0) {
+      const foundUser = users.data.find((user) => user?.email === userEmail);
+      console.log("foundUser:", foundUser);
+      setCurrentUser(foundUser || null);
+    }
+  }, [userEmail, users]);
+  console.log("currentUser form", currentUser);
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">

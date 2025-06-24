@@ -35,10 +35,10 @@ const Profile = () => {
                     <div className="w-full bg-gray-200 h-2 mb-2">
                       <div
                         className="bg-yellow-400 h-2"
-                        style={{ width: `${skill.level}%` }}
+                        style={{ width: `${skill.label}%` }}
                       ></div>
                     </div>
-                    <p className="text-sm text-gray-600">{skill.level}%</p>
+                    <p className="text-sm text-gray-600">{skill.label}%</p>
                   </div>
                 ))}
               </>
@@ -55,11 +55,23 @@ const Profile = () => {
 
           <div className="w-2/3">
             <div className="flex items-center space-x-6">
-              <img
-                src="/img/profile.png"
-                alt="User Image"
-                className="w-24 h-24 rounded-full object-cover"
-              />
+              {currentUser?.photoUrl ? (
+                <img
+                  src={currentUser?.photoUrl}
+                  alt="User Image"
+                  className="w-24 h-24 rounded-full object-cover"
+                />
+              ) : (
+                <>
+                  {" "}
+                  <img
+                    src="/img/profile.png"
+                    alt="User Image"
+                    className="w-24 h-24 rounded-full object-cover"
+                  />
+                </>
+              )}
+
               <div>
                 <h2 className="text-2xl font-semibold text-gray-800">
                   {currentUser?.name ? (
