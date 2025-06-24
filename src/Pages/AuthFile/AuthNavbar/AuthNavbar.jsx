@@ -51,17 +51,7 @@ const AuthNavbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <details>
-              <summary>Course</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Buy</a>
-                </li>
-                <li>
-                  <a>Sell</a>
-                </li>
-              </ul>
-            </details>
+            <NavLink to="/courses">Courses</NavLink>
           </li>
           <li>
             <details>

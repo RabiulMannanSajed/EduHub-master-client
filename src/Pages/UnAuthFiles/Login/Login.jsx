@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import loginImg from "../../../../src/assets/images/login.jpg";
 const Login = () => {
   const {
     register,
@@ -46,7 +46,7 @@ const Login = () => {
   return (
     <div className="p-10 bg-white flex items-center">
       <div className="flex-1">
-        <h1 className="textColor mb-[10%] ">UiU CLS</h1>
+        <h1 className="textColor mb-[10%] ">EDU Hub</h1>
         <p className="textColor ml-[65%]">
           <u>Login</u>
         </p>
@@ -101,9 +101,9 @@ const Login = () => {
           </NavLink>{" "}
         </p>
       </div>
-      {/* <div className="flex-1">
+      <div className="flex-1">
         <img className="w-[100%]" src={loginImg} alt="" />
-      </div> */}
+      </div>
     </div>
   );
 };

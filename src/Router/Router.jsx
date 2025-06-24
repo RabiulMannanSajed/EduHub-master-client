@@ -11,6 +11,7 @@ import BookBuy from "../Pages/AuthFile/BuyBookAndItems/BookBuy/BookBuy";
 import ItemBuy from "../Pages/AuthFile/BuyBookAndItems/ItemBuy/ItemBuy";
 import AuthHome from "../Pages/AuthFile/AuthHome/AuthHome/AuthHome";
 import ProfileSetting from "../Pages/AuthFile/Profile/ProfileSetting/ProfileSetting";
+import Courses from "../Pages/AuthFile/Courses/Courses/Courses";
 
 export const route = createBrowserRouter([
   {
@@ -29,10 +30,7 @@ export const route = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      {
-        path: "/payment",
-        element: <Payment />,
-      },
+
       {
         path: "/profile",
         element: <Profile />,
@@ -60,6 +58,14 @@ export const route = createBrowserRouter([
       {
         path: "/authHome",
         element: <AuthHome />,
+      },
+      {
+        path: "/courses",
+        element: <Courses />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
       },
     ],
   },

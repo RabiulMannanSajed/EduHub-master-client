@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import login from "../../../../src/assets/images/login.jpg";
 const Register = () => {
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ const Register = () => {
   return (
     <div className="p-10 bg-white flex items-center">
       <div className="flex-1">
-        <h1 className="textColor mb-[10%] ">UiU CLS</h1>
+        <h1 className="textColor mb-[10%] ">EDU Hub </h1>
         <p className="textColor ml-[65%]">
           <u>Sign Up</u>
         </p>
@@ -201,7 +201,7 @@ const Register = () => {
       </div>
 
       <div className="flex-1">
-        {/* <img className="w-[100%]" src={loginImg} alt="" /> */}
+        <img className="w-[100%]" src={login} alt="" />
       </div>
     </div>
   );
