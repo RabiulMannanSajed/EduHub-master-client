@@ -107,7 +107,7 @@ const Profile = () => {
                       </p>
                     )}
                     {freelancer.bio && (
-                      <p className="text-sm text-gray-500 italic">
+                      <p className="text-sm text-gray-500 italic ">
                         {freelancer.bio}
                       </p>
                     )}
