@@ -10,6 +10,7 @@ import ProfileOfHelper from "../Pages/AuthFile/ProfileOfHelper/ProfileOfHelper";
 import BookBuy from "../Pages/AuthFile/BuyBookAndItems/BookBuy/BookBuy";
 import ItemBuy from "../Pages/AuthFile/BuyBookAndItems/ItemBuy/ItemBuy";
 import AuthHome from "../Pages/AuthFile/AuthHome/AuthHome/AuthHome";
+import ProfileSetting from "../Pages/AuthFile/Profile/ProfileSetting/ProfileSetting";
 
 export const route = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const route = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/profileSetting",
+        element: <ProfileSetting />,
       },
       {
         path: "/bloodCamp",

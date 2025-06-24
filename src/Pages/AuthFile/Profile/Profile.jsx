@@ -1,60 +1,52 @@
+import { useEffect, useState } from "react";
+import useBloodDonors from "../../../hooks/useBloodDonners";
+import { useUser } from "../CustomProvider/userContext";
+
 const Profile = () => {
+  const { userEmail } = useUser();
+  const [users] = useBloodDonors(); // get the data array from the object
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    console.log("userEmail:", userEmail);
+    console.log("users:", users?.data);
+
+    if (userEmail && users?.data?.length > 0) {
+      const foundUser = users.data.find((user) => user?.email === userEmail);
+      console.log("foundUser:", foundUser);
+      setCurrentUser(foundUser || null);
+    }
+  }, [userEmail, users]);
+
+  console.log("currentUser:", currentUser);
   return (
     <div className="max-w-[80%] mx-auto">
       <div className=" mt-10 p-6 bg-white rounded-lg shadow-lg">
         <div className="flex border-b-2 border-gray-300 pb-6">
           <div className="w-1/3 pr-8">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Skills</h3>
-            <div className="mb-3">
-              <p className="text-sm text-gray-600">HTML</p>
-              <div className="w-full bg-gray-200 h-2 mb-2">
-                <div
-                  className="bg-yellow-400 h-2"
-                  style={{ width: "90%" }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-600">90%</p>
-            </div>
-            <div className="mb-3">
-              <p className="text-sm text-gray-600">CSS</p>
-              <div className="w-full bg-gray-200 h-2 mb-2">
-                <div
-                  className="bg-yellow-400 h-2"
-                  style={{ width: "85%" }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-600">85%</p>
-            </div>
-            <div className="mb-3">
-              <p className="text-sm text-gray-600">JavaScript</p>
-              <div className="w-full bg-gray-200 h-2 mb-2">
-                <div
-                  className="bg-yellow-400 h-2"
-                  style={{ width: "80%" }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-600">80%</p>
-            </div>
-            <div className="mb-3">
-              <p className="text-sm text-gray-600">PHP</p>
-              <div className="w-full bg-gray-200 h-2 mb-2">
-                <div
-                  className="bg-yellow-400 h-2"
-                  style={{ width: "75%" }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-600">75%</p>
-            </div>
-            <div className="mb-3">
-              <p className="text-sm text-gray-600">WordPress</p>
-              <div className="w-full bg-gray-200 h-2 mb-2">
-                <div
-                  className="bg-yellow-400 h-2"
-                  style={{ width: "85%" }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-600">85%</p>
-            </div>
+            {currentUser?.skills?.length > 0 ? (
+              <>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                  Skills
+                </h3>
+                {currentUser.skills.map((skill, index) => (
+                  <div className="mb-3" key={index}>
+                    <p className="text-sm text-gray-600">{skill.name}</p>
+                    <div className="w-full bg-gray-200 h-2 mb-2">
+                      <div
+                        className="bg-yellow-400 h-2"
+                        style={{ width: `${skill.level}%` }}
+                      ></div>
+                    </div>
+                    <p className="text-sm text-gray-600">{skill.level}%</p>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                No skills added
+              </h3>
+            )}
 
             <button className="mt-6 bg-black text-white px-4 py-2 rounded hover:bg-gray-700 w-full">
               Download CV
@@ -70,13 +62,33 @@ const Profile = () => {
               />
               <div>
                 <h2 className="text-2xl font-semibold text-gray-800">
-                  Oronno Anam
+                  {currentUser?.name ? (
+                    <h2 className="text-2xl font-semibold text-gray-800">
+                      {currentUser.name}
+                    </h2>
+                  ) : (
+                    <></>
+                  )}
                 </h2>
-                <p className="text-sm text-gray-500">Instructor at EduHub</p>
+                {currentUser?.email ? (
+                  <p className="text-sm text-gray-500">{currentUser.email}</p>
+                ) : (
+                  <></>
+                )}{" "}
                 <p className="text-sm text-gray-500">
-                  Admin | Working at CodersLab
+                  {" "}
+                  coming Instructor at EduHub
                 </p>
-                <p className="text-sm text-gray-500">University of Dhaka</p>
+                <p className="text-sm text-gray-500">
+                  coming Admin | Working at CodersLab
+                </p>
+                {currentUser?.varsityName ? (
+                  <p className="text-sm text-gray-500">
+                    {currentUser.varsityName}
+                  </p>
+                ) : (
+                  <></>
+                )}{" "}
                 <div className="flex space-x-4 mt-2">
                   <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm">
                     Message
@@ -90,8 +102,14 @@ const Profile = () => {
 
             <div className="mt-6 flex space-x-6 text-sm text-gray-600">
               <span className="flex items-center space-x-1">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-600"></div>
-                <span>AB+</span>
+                {currentUser?.blood ? (
+                  <span className="flex items-center space-x-1">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-600"></div>
+                    <span>{currentUser.blood}</span>
+                  </span>
+                ) : (
+                  <></>
+                )}
               </span>
               <span className="flex items-center space-x-1">
                 <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>

@@ -36,7 +36,7 @@ const Register = () => {
 
       const result = await response.json();
       if (response.ok) {
-        navigate("/authHome");
+        navigate("/login");
         alert("Registration successful!");
         reset(); // Clear form
       } else {
