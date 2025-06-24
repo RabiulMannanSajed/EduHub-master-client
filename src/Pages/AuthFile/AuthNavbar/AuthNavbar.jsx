@@ -84,7 +84,9 @@ const AuthNavbar = () => {
               <summary>Freelancing</summary>
               <ul className="p-2">
                 <li>
-                  <a>Apply for Instructor</a>
+                  <NavLink to="/freelancingInstructor">
+                    Apply for Instructor
+                  </NavLink>
                 </li>
                 <li>
                   <a>Find Freelancing</a>

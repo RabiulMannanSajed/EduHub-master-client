@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import axios from "axios";
+import useBloodDonors from "../../../../hooks/useBloodDonners";
+import { useUser } from "../../CustomProvider/userContext";
 const img_hosting_token = "33706d1cbb5d148ebd01d844598979ba";
 
 const CreateCourse = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { userEmail } = useUser();
+  const [users] = useBloodDonors(); // get the data array from the object
+  const [currentUser, setCurrentUser] = useState(null);
 
+  useEffect(() => {
+    if (userEmail && users?.data?.length > 0) {
+      const foundUser = users.data.find((user) => user?.email === userEmail);
+      console.log("foundUser:", foundUser);
+      setCurrentUser(foundUser || null);
+    }
+  }, [userEmail, users]);
+  console.log("currentUser form sell", currentUser);
   const { register, control, handleSubmit, reset } = useForm({
     defaultValues: {
       title: "",
@@ -23,10 +36,53 @@ const CreateCourse = () => {
   });
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
-  const onSubmit = async (data) => {
-    let profileImageUrl = currentUser?.photoUrl || "";
+  //   const onSubmit = async (data) => {
+  //     // Upload image if selected
+  //     if (data.courseImage?.[0]) {
+  //       const formData = new FormData();
+  //       formData.append("image", data.courseImage[0]);
 
-    // Upload image if selected
+  //       const imgRes = await fetch(img_hosting_url, {
+  //         method: "POST",
+  //         body: formData,
+  //       });
+
+  //       const imgData = await imgRes.json();
+  //       const imageURL = imgData.success ? imgData.data.display_url : null;
+  //       setImgUrl(imageURL);
+  //       if (!imageURL) {
+  //         alert("Image upload failed");
+  //         return;
+  //       }
+  //     }
+  //     const payload = {
+  //       ...data,
+  //       courseImage: imgUrl,
+  //       userID: currentUser?._id, // ✅ Include user ID here
+  //       photo: undefined,
+  //     };
+  //     try {
+  //       // Replace with your actual API URL
+  //       const res = await axios.post(
+  //         "http://localhost:5000/api/v1/courses/create-sell-courses",
+  //         payload
+  //       );
+
+  //       if (res.ok) {
+  //         alert("Sell post uploaded successfully!");
+  //         setIsOpen(false);
+  //         reset();
+  //       } else {
+  //         alert("Failed to post: " + res.message || "Unknown error");
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to create course", error);
+  //       alert("Something went wrong!");
+  //     }
+  //   };
+  const onSubmit = async (data) => {
+    let imageURL = "";
+
     if (data.photo?.[0]) {
       const formData = new FormData();
       formData.append("image", data.photo[0]);
@@ -37,26 +93,33 @@ const CreateCourse = () => {
       });
 
       const imgData = await imgRes.json();
-      if (imgData.success) {
-        profileImageUrl = imgData.data.display_url;
+      imageURL = imgData.success ? imgData.data.display_url : "";
+
+      if (!imageURL) {
+        alert("Image upload failed");
+        return;
       }
     }
 
-    // Build update payload
-    const updatedData = {
+    const payload = {
       ...data,
-      photoUrl: profileImageUrl,
+      courseImage: imageURL,
+      userID: currentUser?._id, // ✅ Include user ID here
     };
+
     try {
-      // Replace with your actual API URL
-      const userId = "YOUR_USER_ID"; // get from context/auth if needed
       const res = await axios.post(
-        `http://localhost:5000/api/v1/courses/create/${userId}`,
-        data
+        "http://localhost:5000/api/v1/courses/create-sell-courses",
+        payload
       );
-      alert("Course created!");
-      reset();
-      setIsOpen(false);
+
+      if (res.data.success) {
+        alert("Course created successfully!");
+        setIsOpen(false);
+        reset();
+      } else {
+        alert("Failed to post: " + res.data.message || "Unknown error");
+      }
     } catch (error) {
       console.error("Failed to create course", error);
       alert("Something went wrong!");

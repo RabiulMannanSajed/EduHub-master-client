@@ -1,24 +1,32 @@
 import { useEffect, useState } from "react";
 import useBloodDonors from "../../../hooks/useBloodDonners";
 import { useUser } from "../CustomProvider/userContext";
+import useFreelancer from "../../../hooks/useFreelancer";
 
 const Profile = () => {
   const { userEmail } = useUser();
+  const [freelances] = useFreelancer();
   const [users] = useBloodDonors(); // get the data array from the object
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    console.log("userEmail:", userEmail);
-    console.log("users:", users?.data);
-
     if (userEmail && users?.data?.length > 0) {
       const foundUser = users.data.find((user) => user?.email === userEmail);
-      console.log("foundUser:", foundUser);
       setCurrentUser(foundUser || null);
     }
   }, [userEmail, users]);
 
   console.log("currentUser:", currentUser);
+
+  //find freelancer
+
+  const freelancer = Array.isArray(freelances?.data)
+    ? freelances.data.find((item) => item.userID === currentUser?._id)
+    : null;
+
+  console.log("freelancer:", freelancer);
+
+  console.log(freelancer);
   return (
     <div className="max-w-[80%] mx-auto">
       <div className=" mt-10 p-6 bg-white rounded-lg shadow-lg">
@@ -86,13 +94,27 @@ const Profile = () => {
                 ) : (
                   <></>
                 )}{" "}
-                <p className="text-sm text-gray-500">
-                  {" "}
-                  coming Instructor at EduHub
-                </p>
-                <p className="text-sm text-gray-500">
-                  coming Admin | Working at CodersLab
-                </p>
+                {freelancer ? (
+                  <>
+                    {freelancer.workType && (
+                      <p className="text-sm text-gray-500">
+                        {freelancer.workType} at EduHub
+                      </p>
+                    )}
+                    {freelancer.workTitle && (
+                      <p className="text-sm text-gray-500 uppercase">
+                        {freelancer.workTitle}
+                      </p>
+                    )}
+                    {freelancer.bio && (
+                      <p className="text-sm text-gray-500 italic">
+                        {freelancer.bio}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <></>
+                )}
                 {currentUser?.varsityName ? (
                   <p className="text-sm text-gray-500">
                     {currentUser.varsityName}

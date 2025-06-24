@@ -12,6 +12,8 @@ import ItemBuy from "../Pages/AuthFile/BuyBookAndItems/ItemBuy/ItemBuy";
 import AuthHome from "../Pages/AuthFile/AuthHome/AuthHome/AuthHome";
 import ProfileSetting from "../Pages/AuthFile/Profile/ProfileSetting/ProfileSetting";
 import Courses from "../Pages/AuthFile/Courses/Courses/Courses";
+import CourseDetails from "../Pages/AuthFile/Courses/courseDetails/courseDetails";
+import FreelancingInstructor from "../Pages/AuthFile/Freelancing/Freelancing/FreelancingInstructor";
 
 export const route = createBrowserRouter([
   {
@@ -66,6 +68,15 @@ export const route = createBrowserRouter([
       {
         path: "/payment",
         element: <Payment />,
+      },
+      {
+        path: "/freelancingInstructor",
+        element: <FreelancingInstructor />,
+      },
+      // use this next
+      {
+        path: "/courseDetails",
+        element: <CourseDetails />,
       },
     ],
   },
