@@ -1,6 +1,45 @@
+import useBloodDonors from "../../../../hooks/useBloodDonners";
+import useFreelancer from "../../../../hooks/useFreelancer";
+
 const FIndFreelancer = () => {
-  // here find all FIndFreelancer
-  return <div></div>;
+  const [freelances] = useFreelancer();
+  const [users] = useBloodDonors();
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      {freelances?.data?.map((freelance) => {
+        // Find the matching user
+        const matchedUser = users?.data?.find(
+          (user) => user._id === freelance.userID
+        );
+
+        return (
+          <div
+            key={freelance._id}
+            className="border p-4 rounded shadow bg-white"
+          >
+            <h2 className="text-lg font-bold mb-2">{freelance.workType}</h2>
+            <p className="text-gray-700 mb-1">
+              <strong>Name:</strong>{" "}
+              {matchedUser ? matchedUser.name : "Unknown"}
+            </p>
+            <p className="text-gray-700 mb-1">
+              <strong>Bio:</strong> {freelance.bio}
+            </p>
+            <p className="text-gray-700 mb-1">
+              <strong>Title:</strong> {freelance.workTitle}
+            </p>
+            <p className="text-gray-700 mb-1">
+              <strong>Details:</strong> {freelance.workDetails}
+            </p>
+            <p className="text-gray-900 font-semibold">
+              <strong>Price:</strong> ${freelance.workPrice}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default FIndFreelancer;

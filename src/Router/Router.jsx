@@ -15,6 +15,7 @@ import Courses from "../Pages/AuthFile/Courses/Courses/Courses";
 import CourseDetails from "../Pages/AuthFile/Courses/courseDetails/courseDetails";
 import FreelancingInstructor from "../Pages/AuthFile/Freelancing/Freelancing/FreelancingInstructor";
 import CV from "../Pages/AuthFile/CV/CV";
+import FIndFreelancer from "../Pages/AuthFile/Freelancing/FIndFreelancer/FIndFreelancer";
 
 export const route = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ export const route = createBrowserRouter([
       {
         path: "/cv",
         element: <CV />,
+      },
+      {
+        path: "/findFreelancer",
+        element: <FIndFreelancer />,
       },
     ],
   },

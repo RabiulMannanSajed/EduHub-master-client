@@ -74,7 +74,6 @@ const CV = () => {
           <p className="text-gray-800 font-medium">
             {matchedFreelance.workType}
           </p>
-          <p className="text-gray-700">{matchedFreelance.workTitle}</p>
           <p className="text-gray-600">
             Skills: {matchedFreelance.workDetails}
           </p>

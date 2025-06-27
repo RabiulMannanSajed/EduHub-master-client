@@ -87,10 +87,9 @@ const AuthNavbar = () => {
                   <NavLink to="/freelancingInstructor">
                     Apply for Instructor
                   </NavLink>
-                </li>
-                <li>
-                  <a>Find Freelancing</a>
-                </li>
+                </li>{" "}
+                <NavLink to="/findFreelancer">Find Freelancer</NavLink>
+                <li></li>
               </ul>
             </details>
           </li>
