@@ -18,11 +18,9 @@ const BlogPost = ({ onClose }) => {
 
   useEffect(() => {
     if (watchImage && watchImage[0]) {
-      console.log("File selected:", watchImage[0]);
       const file = watchImage[0];
       const reader = new FileReader();
       reader.onloadend = () => {
-        console.log("FileReader result", reader.result);
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
@@ -64,7 +62,6 @@ const BlogPost = ({ onClose }) => {
       userId: currentUser?._id,
       // add other fields you want to send
     };
-    console.log(updatedData);
     try {
       const response = await fetch(
         "http://localhost:5000/api/v1/posts/create-post",

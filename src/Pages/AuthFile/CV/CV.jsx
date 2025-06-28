@@ -9,16 +9,11 @@ const CV = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    console.log("userEmail:", userEmail);
-    console.log("users:", users?.data);
-
     if (userEmail && users?.data?.length > 0) {
       const foundUser = users.data.find((user) => user?.email === userEmail);
-      console.log("foundUser:", foundUser);
       setCurrentUser(foundUser || null);
     }
   }, [userEmail, users]);
-  console.log("currentUser form", currentUser);
   const [freelances] = useFreelancer();
 
   const [matchedFreelance, setMatchedFreelance] = useState(null);

@@ -17,8 +17,6 @@ const Profile = () => {
     }
   }, [userEmail, users]);
 
-  console.log("currentUser:", currentUser);
-
   //find freelancer
 
   const freelancer = Array.isArray(freelances?.data)

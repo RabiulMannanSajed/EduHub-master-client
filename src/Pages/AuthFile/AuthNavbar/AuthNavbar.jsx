@@ -12,16 +12,11 @@ const AuthNavbar = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    console.log("userEmail:", userEmail);
-    console.log("users:", users?.data);
-
     if (userEmail && users?.data?.length > 0) {
       const foundUser = users.data.find((user) => user?.email === userEmail);
-      console.log("foundUser:", foundUser);
       setCurrentUser(foundUser || null);
     }
   }, [userEmail, users]);
-  console.log("currentUser form", currentUser);
 
   return (
     <div className="navbar bg-base-100 shadow-sm">

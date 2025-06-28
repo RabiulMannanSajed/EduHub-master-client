@@ -6,7 +6,7 @@ const useBlogs = () => {
     data: blogs = [],
     refetch,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["blogs"],
     queryFn: async () => {
       const res = await fetch(
         "http://localhost:5000/api/v1/posts/get-all-post"
