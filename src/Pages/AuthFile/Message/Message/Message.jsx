@@ -14,7 +14,6 @@ const Message = ({ onClose }) => {
   const messagesContainerRef = useRef(null);
   const messagesEndRef = useRef(null);
 
-  // Identify current user
   useEffect(() => {
     if (userEmail && users?.data?.length > 0) {
       const foundUser = users.data.find((user) => user?.email === userEmail);

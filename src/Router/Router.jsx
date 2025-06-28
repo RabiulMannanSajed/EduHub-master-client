@@ -18,6 +18,8 @@ import CV from "../Pages/AuthFile/CV/CV";
 import FIndFreelancer from "../Pages/AuthFile/Freelancing/FIndFreelancer/FIndFreelancer";
 import VideoChat from "../Pages/AuthFile/VideoChat/VideoChat";
 import Message from "../Pages/AuthFile/Message/Message/Message";
+import BlogPost from "../Pages/AuthFile/Blog/BlogPost/BlogPost";
+import Blogs from "../Pages/AuthFile/Blog/Blogs/Blogs";
 
 export const route = createBrowserRouter([
   {
@@ -97,6 +99,10 @@ export const route = createBrowserRouter([
       {
         path: "/videoChat",
         element: <VideoChat />,
+      },
+      {
+        path: "/blog",
+        element: <Blogs />,
       },
     ],
   },

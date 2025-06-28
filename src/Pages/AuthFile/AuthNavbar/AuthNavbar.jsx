@@ -57,17 +57,7 @@ const AuthNavbar = () => {
             <NavLink to="/courses">Courses</NavLink>
           </li>
           <li>
-            <details>
-              <summary>TUITION</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Ask</a>
-                </li>
-                <li>
-                  <a>Register</a>
-                </li>
-              </ul>
-            </details>
+            <NavLink to="/blog">Blog</NavLink>
           </li>
           <li>
             <details>
