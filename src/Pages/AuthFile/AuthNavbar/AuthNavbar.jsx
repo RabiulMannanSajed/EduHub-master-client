@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useUser } from "../CustomProvider/userContext";
 import useBloodDonors from "../../../hooks/useBloodDonners";
-
+import message from "../../../../src/assets/images/message.jpg";
+import { FaRegCircleUser } from "react-icons/fa6";
+import Message from "../Message/Message/Message";
 const AuthNavbar = () => {
   const { userEmail } = useUser();
   const [users] = useBloodDonors(); // get the data array from the object
   const [currentUser, setCurrentUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     console.log("userEmail:", userEmail);
@@ -99,6 +102,21 @@ const AuthNavbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
+        <div>
+          <div>
+            {/* Button to open the modal */}
+            <button onClick={() => setShowModal(true)}>
+              <img
+                className="w-12 h-12 mr-5 object-cover"
+                src={message}
+                alt="Message"
+              />
+            </button>
+
+            {/* Render the modal if showModal is true */}
+            {showModal && <Message onClose={() => setShowModal(false)} />}
+          </div>
+        </div>
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -114,11 +132,7 @@ const AuthNavbar = () => {
             ) : (
               <>
                 {" "}
-                <img
-                  src="/img/profile.png"
-                  alt="User Image"
-                  className="w-24 h-24 rounded-full object-cover"
-                />
+                <FaRegCircleUser className="w-24 h-24 rounded-full object-cover" />
               </>
             )}
           </div>

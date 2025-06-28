@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useUser } from "../../CustomProvider/userContext";
 import useBloodDonors from "../../../../hooks/useBloodDonners";
+import useFreelancer from "../../../../hooks/useFreelancer";
 
 const FreelancingInstructor = () => {
   const { userEmail } = useUser();
-  const [users] = useBloodDonors(); // get the data array from the object
+  const [users] = useBloodDonors();
   const [currentUser, setCurrentUser] = useState(null);
+  const [freelances] = useFreelancer();
+
+  const [matchedFreelance, setMatchedFreelance] = useState(null);
 
   useEffect(() => {
-    console.log("userEmail:", userEmail);
-    console.log("users:", users?.data);
-
-    if (userEmail && users?.data?.length > 0) {
-      const foundUser = users.data.find((user) => user?.email === userEmail);
-      console.log("foundUser:", foundUser);
-      setCurrentUser(foundUser || null);
+    if (freelances?.data && currentUser?._id) {
+      const match = freelances.data.find(
+        (freelance) => String(freelance.userID) === String(currentUser._id)
+      );
+      setMatchedFreelance(match);
     }
-  }, [userEmail, users]);
-  console.log("currentUser form", currentUser);
+  }, [freelances, currentUser]);
 
   const {
     register,

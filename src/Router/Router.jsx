@@ -16,6 +16,8 @@ import CourseDetails from "../Pages/AuthFile/Courses/courseDetails/courseDetails
 import FreelancingInstructor from "../Pages/AuthFile/Freelancing/Freelancing/FreelancingInstructor";
 import CV from "../Pages/AuthFile/CV/CV";
 import FIndFreelancer from "../Pages/AuthFile/Freelancing/FIndFreelancer/FIndFreelancer";
+import VideoChat from "../Pages/AuthFile/VideoChat/VideoChat";
+import Message from "../Pages/AuthFile/Message/Message/Message";
 
 export const route = createBrowserRouter([
   {
@@ -85,8 +87,16 @@ export const route = createBrowserRouter([
         element: <CV />,
       },
       {
+        path: "/message",
+        element: <Message />,
+      },
+      {
         path: "/findFreelancer",
         element: <FIndFreelancer />,
+      },
+      {
+        path: "/videoChat",
+        element: <VideoChat />,
       },
     ],
   },
