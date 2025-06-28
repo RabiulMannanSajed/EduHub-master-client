@@ -13,6 +13,7 @@ const Message = ({ onClose }) => {
   const { register, handleSubmit, reset } = useForm();
   const messagesContainerRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     if (userEmail && users?.data?.length > 0) {
@@ -21,7 +22,11 @@ const Message = ({ onClose }) => {
     }
   }, [userEmail, users]);
 
-  // Fetch messages between users
+  const filteredUsers = users?.data?.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Fetch messages
   useEffect(() => {
     if (!currentUser || !selectedUser) return;
 
@@ -46,7 +51,6 @@ const Message = ({ onClose }) => {
     return () => clearInterval(interval);
   }, [currentUser, selectedUser]);
 
-  // Scroll helper
   const isNearBottom = () => {
     const container = messagesContainerRef.current;
     if (!container) return false;
@@ -55,7 +59,6 @@ const Message = ({ onClose }) => {
     return container.scrollHeight - position < threshold;
   };
 
-  // Auto-scroll if near bottom
   useEffect(() => {
     if (isNearBottom() && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -84,7 +87,6 @@ const Message = ({ onClose }) => {
       if (response.ok) {
         console.log("Message sent!");
         reset();
-        // Force scroll to bottom on send
         setTimeout(() => {
           messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
         }, 100);
@@ -96,7 +98,6 @@ const Message = ({ onClose }) => {
     }
   };
 
-  // Filter messages for this conversation
   const filteredMessages = messages?.filter(
     (m) =>
       (m.fromID === currentUser?._id && m.toID === selectedUser?._id) ||
@@ -106,7 +107,6 @@ const Message = ({ onClose }) => {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg w-[90%] md:w-[70%] max-h-[100vh] overflow-y-auto p-4">
-        {/* Close Button */}
         <div className="flex justify-end mb-4">
           <button
             onClick={onClose}
@@ -119,7 +119,14 @@ const Message = ({ onClose }) => {
         <div className="flex">
           {/* User List */}
           <div className="w-[30%] border-r pr-2">
-            {users?.data?.map((user) => (
+            <input
+              type="text"
+              placeholder="Search users..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full border rounded px-2 py-1 mb-2"
+            />
+            {filteredUsers?.map((user) => (
               <div
                 key={user._id}
                 onClick={() => setSelectedUser(user)}
@@ -143,7 +150,7 @@ const Message = ({ onClose }) => {
             ))}
           </div>
 
-          {/* Chat Area */}
+          {/* Chat */}
           <div className="flex flex-col flex-1 pl-4">
             {selectedUser ? (
               <>
@@ -203,7 +210,6 @@ const Message = ({ onClose }) => {
                   <div ref={messagesEndRef} />
                 </div>
 
-                {/* Message Input */}
                 <form
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex gap-2 mt-4 border-t pt-4"
