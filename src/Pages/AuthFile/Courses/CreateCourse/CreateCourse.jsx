@@ -84,9 +84,9 @@ const CreateCourse = () => {
       {/* Plus button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-blue-600 text-white px-4 py-2 rounded-full text-xl"
+        className=" bg-black hover:bg-gray-600 rounded-md transform transition duration-500 hover:scale-105 cursor-pointer text-center px-5 py-2  font-semibold text-white  "
       >
-        Create course For sell
+        Create course
       </button>
 
       {/* Modal */}

@@ -50,7 +50,7 @@ const FIndFreelancer = () => {
                   <strong>Price:</strong> ${freelance.workPrice}
                 </p>
                 <Link to={`/blood-donor/${freelance.userID}`}>
-                  <p className="bg-amber-400 p-2 text-center font-semibold text-xl rounded-xl mt-5 ">
+                  <p className="mt-4 w-full inline-block bg-red-600 text-white py-2 rounded-md hover:bg-red-700 text-sm font-semibold text-center">
                     Contract{" "}
                   </p>
                 </Link>

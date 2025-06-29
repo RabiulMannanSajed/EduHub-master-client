@@ -77,7 +77,9 @@ const BooksBuyAndSell = () => {
           className="bg-amber-500 w-[130px] m-5 rounded-md cursor-pointer"
           onClick={() => setIsModalOpen(true)}
         >
-          <p className="text-center pl-5 pr-5 pt-2 pb-2 font-bold">Sell Post</p>
+          <p className=" bg-black hover:bg-gray-600 rounded-md transform transition duration-500 hover:scale-105 cursor-pointer text-center px-5 py-2  font-semibold text-white  ">
+            Sell Post
+          </p>
         </div>
 
         {isModalOpen && (
