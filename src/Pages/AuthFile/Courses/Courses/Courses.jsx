@@ -1,13 +1,12 @@
 import React from "react";
 import CreateCourse from "../CreateCourse/CreateCourse";
 import useCourses from "../../../../hooks/useCourses";
-import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
 
 const Courses = () => {
   const [courses] = useCourses();
   const corsesData = courses?.data || [];
   console.log("corsesData", corsesData);
-  const navigate = useNavigate();
   return (
     <div className="w-[80%] mx-auto mt-5 h-screen">
       <CreateCourse />
@@ -23,12 +22,12 @@ const Courses = () => {
               />
               <h2 className="text-xl font-semibold mt-2">{course.title}</h2>
               <p className="text-gray-700 mt-1">${course.price}</p>
-              <button
-                onClick={() => navigate(`/course-details/${course._id}`)}
-                className="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              <NavLink
+                to={`/course-details/${course._id}`}
+                className="mt-3 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
               >
-                Buy Now
-              </button>
+                See Course
+              </NavLink>
             </div>
           ))
         ) : (

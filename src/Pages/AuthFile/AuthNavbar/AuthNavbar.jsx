@@ -84,6 +84,18 @@ const AuthNavbar = () => {
           <li>
             <NavLink to="/bloodCamp">Blood Camp</NavLink>
           </li>
+          <li>
+            <details>
+              <summary>Job</summary>
+              <ul className="p-2">
+                <li>
+                  <NavLink to="/job">Create Job</NavLink>
+                </li>{" "}
+                <NavLink to="/all-jobs">All Jobs</NavLink>
+                <li></li>
+              </ul>
+            </details>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">

@@ -36,53 +36,10 @@ const CreateCourse = () => {
   });
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
-  //   const onSubmit = async (data) => {
-  //     // Upload image if selected
-  //     if (data.courseImage?.[0]) {
-  //       const formData = new FormData();
-  //       formData.append("image", data.courseImage[0]);
-
-  //       const imgRes = await fetch(img_hosting_url, {
-  //         method: "POST",
-  //         body: formData,
-  //       });
-
-  //       const imgData = await imgRes.json();
-  //       const imageURL = imgData.success ? imgData.data.display_url : null;
-  //       setImgUrl(imageURL);
-  //       if (!imageURL) {
-  //         alert("Image upload failed");
-  //         return;
-  //       }
-  //     }
-  //     const payload = {
-  //       ...data,
-  //       courseImage: imgUrl,
-  //       userID: currentUser?._id, // ✅ Include user ID here
-  //       photo: undefined,
-  //     };
-  //     try {
-  //       // Replace with your actual API URL
-  //       const res = await axios.post(
-  //         "http://localhost:5000/api/v1/courses/create-sell-courses",
-  //         payload
-  //       );
-
-  //       if (res.ok) {
-  //         alert("Sell post uploaded successfully!");
-  //         setIsOpen(false);
-  //         reset();
-  //       } else {
-  //         alert("Failed to post: " + res.message || "Unknown error");
-  //       }
-  //     } catch (error) {
-  //       console.error("Failed to create course", error);
-  //       alert("Something went wrong!");
-  //     }
-  //   };
   const onSubmit = async (data) => {
-    let imageURL = "";
+    let profileImageUrl = currentUser?.photoUrl || "";
 
+    // Upload image if selected
     if (data.photo?.[0]) {
       const formData = new FormData();
       formData.append("image", data.photo[0]);
@@ -93,17 +50,13 @@ const CreateCourse = () => {
       });
 
       const imgData = await imgRes.json();
-      imageURL = imgData.success ? imgData.data.display_url : "";
-
-      if (!imageURL) {
-        alert("Image upload failed");
-        return;
+      if (imgData.success) {
+        profileImageUrl = imgData.data.display_url;
       }
     }
-
     const payload = {
       ...data,
-      courseImage: imageURL,
+      courseImage: profileImageUrl,
       userID: currentUser?._id, // ✅ Include user ID here
     };
 
@@ -160,9 +113,9 @@ const CreateCourse = () => {
               />
               <input
                 type="file"
+                {...register("photo")}
                 accept="image/*"
-                {...register("courseImage")}
-                className="w-full p-2 border rounded"
+                className="input"
               />
               <input
                 {...register("meet")}
