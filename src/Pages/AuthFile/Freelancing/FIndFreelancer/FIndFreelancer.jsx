@@ -1,11 +1,24 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useBloodDonors from "../../../../hooks/useBloodDonners";
 import useFreelancer from "../../../../hooks/useFreelancer";
 import { div } from "framer-motion/client";
+import { useUser } from "../../CustomProvider/userContext";
+import { useEffect, useState } from "react";
 
 const FIndFreelancer = () => {
   const [freelances] = useFreelancer();
-  const [users] = useBloodDonors();
+  const { userEmail } = useUser();
+  const [users] = useBloodDonors(); // get the data array from the object
+  const [currentUser, setCurrentUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userEmail && users?.data?.length > 0) {
+      const foundUser = users.data.find((user) => user?.email === userEmail);
+      setCurrentUser(foundUser || null);
+    }
+  }, [userEmail, users]);
 
   return (
     <div className="w-[80%] mx-auto">
@@ -36,11 +49,11 @@ const FIndFreelancer = () => {
                 <p className="text-gray-900 font-semibold">
                   <strong>Price:</strong> ${freelance.workPrice}
                 </p>
-                <NavLink>
+                <Link to={`/blood-donor/${freelance.userID}`}>
                   <p className="bg-amber-400 p-2 text-center font-semibold text-xl rounded-xl mt-5 ">
-                    Hire{" "}
+                    Contract{" "}
                   </p>
-                </NavLink>
+                </Link>
               </div>
             );
           })}
