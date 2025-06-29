@@ -66,7 +66,7 @@ const AuthHome = () => {
               className="text-center px-5 py-2 text-2xl font-bold text-white hove
             hover:text-gray-800"
             >
-              Courses
+              Sell
             </p>
           </div>
         </div>
@@ -89,7 +89,7 @@ const AuthHome = () => {
           </p>
           <div className="mt-20 bg-[#8f40d4] hover:bg-[#aa60eb] w-[150px] rounded-md transition duration-500 hover:scale-105 cursor-pointer">
             <p className="text-center pl-5 pr-5 pt-2 pb-2 text-2xl font-bold text-white hover:text-gray-800">
-              Courses
+              Freelancing
             </p>
             {/* D1A1FB */}
           </div>

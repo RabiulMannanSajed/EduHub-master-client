@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../CustomProvider/userContext";
 import useBloodDonors from "../../../hooks/useBloodDonners";
-import message from "../../../../src/assets/images/message.jpg";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Message from "../Message/Message/Message";
 import { FiMessageSquare } from "react-icons/fi";
@@ -11,13 +10,21 @@ const AuthNavbar = () => {
   const [users] = useBloodDonors(); // get the data array from the object
   const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (userEmail && users?.data?.length > 0) {
       const foundUser = users.data.find((user) => user?.email === userEmail);
       setCurrentUser(foundUser || null);
     }
   }, [userEmail, users]);
+  const handleLogout = () => {
+    // Clear everything
+    localStorage.clear();
+    // Optionally, clear any other state or cookies here
+
+    // Navigate to login or home
+    navigate("/login");
+  };
 
   return (
     <div>
@@ -145,7 +152,7 @@ const AuthNavbar = () => {
                 <NavLink to="/profileSetting">Setting</NavLink>
               </li>
               <li>
-                <a>Logout</a>
+                <button onClick={handleLogout}>Logout</button>
               </li>
             </ul>
           </div>
