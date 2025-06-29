@@ -8,7 +8,7 @@ const Courses = () => {
   const corsesData = courses?.data || [];
   console.log("corsesData", corsesData);
   return (
-    <div className="w-[80%] mx-auto mt-5 h-screen">
+    <div className="w-[80%] mx-auto mt-5">
       <CreateCourse />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">

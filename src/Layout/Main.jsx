@@ -10,10 +10,14 @@ const Main = () => {
   const showNavRoutes = ["/", "/register", "/login"];
   const showNavbar = showNavRoutes.includes(location.pathname);
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       {showNavbar || <AuthNavbar />}
       {showNavbar && <Navbar />}
-      <Outlet />
+
+      <main className="flex-1">
+        <Outlet />
+      </main>
+
       <Footer />
     </div>
   );

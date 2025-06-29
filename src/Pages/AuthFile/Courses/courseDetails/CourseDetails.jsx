@@ -1,6 +1,8 @@
 import React from "react";
 import { useParams } from "react-router";
 import useCourses from "../../../../hooks/useCourses";
+import VideoChat from "../../VideoChat/VideoChat";
+import { NavLink } from "react-router-dom";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -16,6 +18,11 @@ const CourseDetails = () => {
 
   return (
     <div className="max-w-xl mx-auto p-4">
+      <NavLink to="/videoChat">
+        <p className="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+          Create Video Chat{" "}
+        </p>
+      </NavLink>
       <h1 className="text-2xl font-bold mb-2">{course?.title}</h1>
       <p className="text-gray-700 mb-2">Price: ${course?.price}</p>
       <p className="text-gray-700 mb-2">Duration: {course?.hour} hours</p>

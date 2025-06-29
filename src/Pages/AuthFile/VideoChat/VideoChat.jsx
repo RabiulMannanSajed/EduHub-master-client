@@ -53,8 +53,8 @@ const VideoChat = () => {
   return (
     <div className="h-screen">
       <div className="text-center font-bold text-2xl">
-        <p>Share this id to add Person</p>
-        <h2>Your ID: {peerId}</h2>
+        <p className="m-6">Share this id to take Class</p>
+        <h2 className="mb-4">Your ID: {peerId}</h2>
       </div>
       <div className="w-[20%] mx-auto">
         <input
