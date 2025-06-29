@@ -87,7 +87,7 @@ const AuthHome = () => {
           <p className="text-2xl w-[70%] text-gray-500">
             Here You find All Courses of all Subject and find the instructor
           </p>
-          <div className="mt-20 bg-[#8f40d4] hover:bg-[#aa60eb] w-[150px] rounded-md transition duration-500 hover:scale-105 cursor-pointer">
+          <div className="mt-20 bg-[#8f40d4] hover:bg-[#aa60eb] w-[200px] rounded-md transition duration-500 hover:scale-105 cursor-pointer">
             <p className="text-center pl-5 pr-5 pt-2 pb-2 text-2xl font-bold text-white hover:text-gray-800">
               Freelancing
             </p>

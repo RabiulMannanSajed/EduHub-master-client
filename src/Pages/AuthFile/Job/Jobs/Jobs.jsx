@@ -62,7 +62,7 @@ const Jobs = () => {
                 {/* Button */}
                 <NavLink
                   to={`/job-details/${job._id}`}
-                  className="mt-4 w-full inline-block bg-red-600 text-white py-2 rounded-md hover:bg-red-700 text-sm font-semibold text-center"
+                  className="mt-4 w-full inline-block bg-[#8f40d4] hover:bg-[#aa60eb] text-white hover:text-gray-800 py-2 rounded-md text-sm font-semibold text-center"
                 >
                   See Job Details
                 </NavLink>

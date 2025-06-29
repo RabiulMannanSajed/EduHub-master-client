@@ -24,7 +24,7 @@ const ItemBuy = () => {
             <p className="text-gray-600 mb-1">Brand: {device.authorOrBrand}</p>
             <p className="text-gray-600 mb-1">Condition: {device.condition}</p>
             <p className="text-lg font-bold mb-3">Price: ${device.price}</p>
-            <button className="mt-4 w-full inline-block bg-red-600 text-white py-2 rounded-md hover:bg-red-700 text-sm font-semibold text-center">
+            <button className="mt-4 w-full inline-block bg-[#75a841]  hover:bg-[#8fd14c] text-white py-2 rounded-md  text-sm font-semibold text-center">
               Buy This Device
             </button>
           </div>
