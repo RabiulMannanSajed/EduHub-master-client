@@ -96,7 +96,7 @@ const Profile = () => {
                     <>
                       {freelancer.workType && (
                         <p className="text-sm text-gray-500">
-                          {freelancer.workType} at EduHub
+                          {freelancer.workType} at NextGen Learner
                         </p>
                       )}
                       {freelancer.workTitle && (

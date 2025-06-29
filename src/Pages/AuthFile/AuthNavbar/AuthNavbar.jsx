@@ -46,7 +46,7 @@ const AuthNavbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             ></ul>
           </div>
-          <a className="btn btn-ghost text-xl">NextGe</a>
+          <a className="btn btn-ghost text-xl">NextGen Learner</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -108,7 +108,7 @@ const AuthNavbar = () => {
             <div>
               {/* Button to open the modal */}
               <button onClick={() => setShowModal(true)}>
-                <FiMessageSquare className="text-3xl mr-4" />
+                <FiMessageSquare className="text-3xl mr-4 " />
               </button>
 
               {/* Render the modal if showModal is true */}

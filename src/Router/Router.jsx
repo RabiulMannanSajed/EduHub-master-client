@@ -23,6 +23,7 @@ import Blogs from "../Pages/AuthFile/Blog/Blogs/Blogs";
 import Jobs from "../Pages/AuthFile/Job/Jobs/Jobs";
 import CreateJob from "../Pages/AuthFile/Job/CreateJob/CreateJob";
 import JobCard from "../Pages/AuthFile/Job/JobCard/JobCard";
+import AboutUs from "../Pages/UnAuthFiles/AboutUs/AboutUs";
 
 export const route = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ export const route = createBrowserRouter([
       {
         path: "/all-jobs",
         element: <Jobs />,
+      },
+      {
+        path: "/aboutUs",
+        element: <AboutUs />,
       },
       {
         path: "/job-details/:id",

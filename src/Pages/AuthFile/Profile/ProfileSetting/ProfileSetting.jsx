@@ -59,7 +59,6 @@ const ProfileSetting = () => {
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
-  
   const onSubmit = async (data) => {
     let profileImageUrl = currentUser?.photoUrl || "";
 
@@ -162,7 +161,7 @@ const ProfileSetting = () => {
               className="input"
             />
             <button
-              className="bg-red-500 pt-2 pb-2 pl-3 pr-3 rounded font-bold"
+              className="bg-red-500 pt-2 pb-2 pl-3 pr-3 rounded font-bold text-white"
               type="button"
               onClick={() => remove(index)}
             >
