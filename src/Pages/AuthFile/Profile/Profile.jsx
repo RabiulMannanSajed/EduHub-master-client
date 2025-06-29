@@ -3,12 +3,14 @@ import useBloodDonors from "../../../hooks/useBloodDonners";
 import { useUser } from "../CustomProvider/userContext";
 import useFreelancer from "../../../hooks/useFreelancer";
 import { NavLink } from "react-router-dom";
+import Message from "../Message/Message/Message";
 
 const Profile = () => {
   const { userEmail } = useUser();
   const [freelances] = useFreelancer();
   const [users] = useBloodDonors(); // get the data array from the object
   const [currentUser, setCurrentUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (userEmail && users?.data?.length > 0) {
@@ -121,14 +123,15 @@ const Profile = () => {
                     <></>
                   )}{" "}
                   <div className="flex space-x-4 mt-2">
-                    <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm">
+                    <button
+                      onClick={() => setShowModal(true)}
+                      className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm"
+                    >
                       Message
-                    </button>
-                    <button className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 text-sm">
-                      Follow
                     </button>
                   </div>
                 </div>
+                {showModal && <Message onClose={() => setShowModal(false)} />}
               </div>
 
               <div className="mt-6 flex space-x-6 text-sm text-gray-600">
