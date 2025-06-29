@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import c from "../../../../assets/images/c.png";
 import s from "../../../../assets/images/s.png";
 import f from "../../../../assets/images/f.png";
+import { NavLink } from "react-router-dom";
 
 const AuthHome = () => {
   // Animation variants
@@ -27,11 +28,14 @@ const AuthHome = () => {
           <p className="text-2xl w-[70%] text-gray-500">
             Here You find All Courses of all Subject and find the instructor
           </p>
-          <div className="mt-20 bg-amber-600 hover:bg-amber-500 w-[150px] rounded-md transform transition duration-500 hover:scale-105 cursor-pointer">
-            <p className="text-center px-5 py-2 text-2xl font-bold text-white hover:text-gray-700 ">
-              Courses
-            </p>
-          </div>
+          <NavLink to="/courses">
+            {" "}
+            <div className="mt-20 bg-amber-600 hover:bg-amber-500 w-[150px] rounded-md transform transition duration-500 hover:scale-105 cursor-pointer">
+              <p className="text-center px-5 py-2 text-2xl font-bold text-white hover:text-gray-700 ">
+                Courses
+              </p>
+            </div>
+          </NavLink>
         </div>
         <div>
           <img
@@ -61,14 +65,16 @@ const AuthHome = () => {
           <p className="text-2xl text-gray-500">
             What is useless to one person might be valuable to another
           </p>
-          <div className="mt-20 ml-[70%] bg-[#75a841] w-[150px] hover:bg-[#8fd14c]  rounded-md transition duration-500 hover:scale-105 cursor-pointer">
-            <p
-              className="text-center px-5 py-2 text-2xl font-bold text-white hove
+          <NavLink to="/booksBuySell">
+            <div className="mt-20 ml-[70%] bg-[#75a841] w-[150px] hover:bg-[#8fd14c]  rounded-md transition duration-500 hover:scale-105 cursor-pointer">
+              <p
+                className="text-center px-5 py-2 text-2xl font-bold text-white hove
             hover:text-gray-800"
-            >
-              Sell
-            </p>
-          </div>
+              >
+                Sell
+              </p>
+            </div>
+          </NavLink>
         </div>
       </motion.div>
 
@@ -87,12 +93,15 @@ const AuthHome = () => {
           <p className="text-2xl w-[70%] text-gray-500">
             Here You find All Courses of all Subject and find the instructor
           </p>
-          <div className="mt-20 bg-[#8f40d4] hover:bg-[#aa60eb] w-[200px] rounded-md transition duration-500 hover:scale-105 cursor-pointer">
-            <p className="text-center pl-5 pr-5 pt-2 pb-2 text-2xl font-bold text-white hover:text-gray-800">
-              Freelancing
-            </p>
-            {/* D1A1FB */}
-          </div>
+          <NavLink to="/findFreelancer">
+            {" "}
+            <div className="mt-20 bg-[#8f40d4] hover:bg-[#aa60eb] w-[200px] rounded-md transition duration-500 hover:scale-105 cursor-pointer">
+              <p className="text-center pl-5 pr-5 pt-2 pb-2 text-2xl font-bold text-white hover:text-gray-800">
+                Freelancing
+              </p>
+              {/* D1A1FB */}
+            </div>
+          </NavLink>
         </div>
         <div>
           <img
