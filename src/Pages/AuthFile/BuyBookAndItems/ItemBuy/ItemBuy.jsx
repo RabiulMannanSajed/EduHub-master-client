@@ -1,8 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import useDevicecs from "../../../../hooks/useDevicecs";
 import BooksBuyAndSell from "../../BooksBuyAndSell/BooksBuyAndSell";
 
 const ItemBuy = () => {
-  const [sells, refetch] = useDevicecs();
+  const [sells] = useDevicecs();
+  const navigate = useNavigate();
+
+  const handleBuy = (device) => {
+    navigate("/payment", {
+      state: {
+        title: device.title,
+        price: device.price,
+        imageURL: device.imageURL,
+        sellerId: device.userID,
+      },
+    });
+  };
 
   return (
     <div className="w-[80%] mx-auto mt-10">
@@ -24,7 +37,11 @@ const ItemBuy = () => {
             <p className="text-gray-600 mb-1">Brand: {device.authorOrBrand}</p>
             <p className="text-gray-600 mb-1">Condition: {device.condition}</p>
             <p className="text-lg font-bold mb-3">Price: ${device.price}</p>
-            <button className="mt-4 w-full inline-block bg-[#75a841]  hover:bg-[#8fd14c] text-white py-2 rounded-md  text-sm font-semibold text-center">
+
+            <button
+              onClick={() => handleBuy(device)}
+              className="mt-4 w-full inline-block bg-[#75a841] hover:bg-[#8fd14c] text-white py-2 rounded-md text-sm font-semibold text-center"
+            >
               Buy This Device
             </button>
           </div>

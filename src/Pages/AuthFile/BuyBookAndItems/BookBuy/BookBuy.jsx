@@ -1,10 +1,22 @@
+import { useNavigate } from "react-router";
 import useBooks from "../../../../hooks/useBooks";
 import BooksBuyAndSell from "../../BooksBuyAndSell/BooksBuyAndSell";
 
 const BookBuy = () => {
   // Get books from hook
   const [sells, refetch] = useBooks();
+  const navigate = useNavigate();
 
+  const handleBuy = (device) => {
+    navigate("/payment", {
+      state: {
+        title: device.title,
+        price: device.price,
+        imageURL: device.imageURL,
+        sellerId: device.userID,
+      },
+    });
+  };
   return (
     <div className="w-[80%] mx-auto mt-10">
       <BooksBuyAndSell />
@@ -25,7 +37,10 @@ const BookBuy = () => {
             <p className="text-gray-600 mb-1">Author: {book.authorOrBrand}</p>
             <p className="text-gray-600 mb-1">Condition: {book.condition}</p>
             <p className="text-lg font-bold mb-3">Price: ${book.price}</p>
-            <button className="mt-4 w-full inline-block  bg-[#75a841]  hover:bg-[#8fd14c] text-white py-2 rounded-md  text-sm font-semibold text-center">
+            <button
+              onClick={() => handleBuy(book)}
+              className="mt-4 w-full inline-block  bg-[#75a841]  hover:bg-[#8fd14c] text-white py-2 rounded-md  text-sm font-semibold text-center"
+            >
               Buy This Book
             </button>
           </div>

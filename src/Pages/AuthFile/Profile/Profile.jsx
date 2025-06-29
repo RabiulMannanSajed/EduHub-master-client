@@ -4,6 +4,7 @@ import { useUser } from "../CustomProvider/userContext";
 import useFreelancer from "../../../hooks/useFreelancer";
 import { NavLink } from "react-router-dom";
 import Message from "../Message/Message/Message";
+import usePaymet from "../../../hooks/usePaymet";
 
 const Profile = () => {
   const { userEmail } = useUser();
@@ -11,6 +12,7 @@ const Profile = () => {
   const [users] = useBloodDonors(); // get the data array from the object
   const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [orders] = usePaymet();
 
   useEffect(() => {
     if (userEmail && users?.data?.length > 0) {
@@ -155,23 +157,44 @@ const Profile = () => {
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
                   Top Posts
                 </h3>
+                <div className="mt-6">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                    Your Purchase History
+                  </h3>
+                  {orders?.data?.length > 0 ? (
+                    orders.data
+                      .filter((order) => order.buyerId === currentUser?._id)
+                      .map((order) => (
+                        <div
+                          key={order._id}
+                          className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 hover:shadow-lg transition-all mb-4"
+                        >
+                          <ul className="mb-2">
+                            {order.orderSummary.items.map((item, index) => (
+                              <li
+                                key={index}
+                                className="flex justify-between text-sm"
+                              >
+                                <span>{item.name}</span>
+                                <span>${item.price}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          <div className="flex justify-between text-md font-bold mt-2">
+                            <span>Total</span>
+                            <span>${order.orderSummary.totalAmount}</span>
+                          </div>
+                        </div>
+                      ))
+                  ) : (
+                    <p className="text-sm text-gray-500">
+                      You haven't purchased anything yet.
+                    </p>
+                  )}
+                </div>
+
                 <div className="space-y-4">
-                  <div className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 hover:shadow-lg transition-all">
-                    <p className="text-gray-700">
-                      Exploring Tailwind CSS for responsive UI design!
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Posted on March 10, 2025
-                    </p>
-                  </div>
-                  <div className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 hover:shadow-lg transition-all">
-                    <p className="text-gray-700">
-                      Selling my new book on full-stack dev! Check it out.
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Posted on Feb 25, 2025
-                    </p>
-                  </div>
+                  <div className="bg-gray-100 p-4 rounded-md hover:bg-gray-200 hover:shadow-lg transition-all"></div>
                 </div>
               </div>
             </div>

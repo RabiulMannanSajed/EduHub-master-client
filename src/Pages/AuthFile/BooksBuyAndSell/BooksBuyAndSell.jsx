@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useUser } from "../CustomProvider/userContext";
+import useBloodDonors from "../../../hooks/useBloodDonners";
 
 const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
 
 const BooksBuyAndSell = () => {
+  const { userEmail } = useUser();
+  const [users] = useBloodDonors(); // get the data array from the object
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    if (userEmail && users?.data?.length > 0) {
+      const foundUser = users.data.find((user) => user?.email === userEmail);
+      setCurrentUser(foundUser || null);
+    }
+  }, [userEmail, users]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -42,6 +54,7 @@ const BooksBuyAndSell = () => {
         condition: data.condition,
         item: data.itemType,
         imageURL: imageURL,
+        userID: currentUser._id,
       };
 
       const res = await fetch(

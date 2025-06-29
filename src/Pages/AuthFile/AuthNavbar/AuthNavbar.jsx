@@ -17,6 +17,7 @@ const AuthNavbar = () => {
       setCurrentUser(foundUser || null);
     }
   }, [userEmail, users]);
+
   const handleLogout = () => {
     // Clear everything
     localStorage.clear();
