@@ -171,16 +171,6 @@ const Blogs = () => {
                     >
                       <AiFillLike />
                     </button>
-
-                    {/* <button
-                      onClick={() => {
-                        setActivePostId(blog._id); // Set post ID here
-                        setShowCommentModal(true);
-                      }}
-                      className="text-2xl text-gray-700 hover:text-blue-400"
-                    >
-                      <FaComment />
-                    </button> */}
                   </div>
 
                   {/* Comment Modal */}
