@@ -11,7 +11,7 @@ const AuthHome = () => {
   };
 
   return (
-    <div className="w-[70%] mx-auto">
+    <div className="w-[80%] mx-auto">
       {/* 1 */}
       <motion.div
         className="flex bg-amber-200 items-center justify-center mt-10 mb-10 rounded-2xl"

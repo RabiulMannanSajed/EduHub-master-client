@@ -5,6 +5,7 @@ import useBloodDonors from "../../../hooks/useBloodDonners";
 import message from "../../../../src/assets/images/message.jpg";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Message from "../Message/Message/Message";
+import { FiMessageSquare } from "react-icons/fi";
 const AuthNavbar = () => {
   const { userEmail } = useUser();
   const [users] = useBloodDonors(); // get the data array from the object
@@ -107,11 +108,7 @@ const AuthNavbar = () => {
             <div>
               {/* Button to open the modal */}
               <button onClick={() => setShowModal(true)}>
-                <img
-                  className="w-12 h-12 mr-5 object-cover"
-                  src={message}
-                  alt="Message"
-                />
+                <FiMessageSquare className="text-3xl mr-4" />
               </button>
 
               {/* Render the modal if showModal is true */}
